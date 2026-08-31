@@ -1,0 +1,20 @@
+name: test workflow
+on: pull_request
+  types:
+    - opened
+
+jobs:
+  testing-action:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull_requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Post PR Comment
+        uses: ./
+        with:
+          github-token: ${{ secrets.github-token }}
+          giphy-api-key: ${{ secrets.GIPHY_API_KEY }}
